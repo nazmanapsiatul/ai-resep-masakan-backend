@@ -28,7 +28,7 @@ def extract():
     prompt = f"""
 Anda adalah seorang chef Indonesia.
 
-Buatkan 3 resep masakan sederhana untuk anak kos dari bahan berikut:
+Buatkan 5 resep masakan sederhana untuk anak kos dari bahan berikut:
 
 {text}
 
@@ -72,7 +72,7 @@ Langkah:
 
 Tips:
 
-Buat 3 resep yang berbeda.
+Buat 5 resep yang berbeda.
 """
 
     response = client.chat.completions.create(
