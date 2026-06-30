@@ -167,18 +167,33 @@ Buat 3 resep yang berbeda.
     })
 
 @app.route("/chat", methods=["POST"])
-def chat():
+def chat_ai():
 
     data = request.get_json()
-    pertanyaan = data.get("question", "")
+
+    question = data["question"]
+    recipe_name = data["recipe_name"]
 
     prompt = f"""
-Kamu adalah AI Chef yang membantu anak kos.
+Kamu adalah AI Chef Indonesia khusus anak kos.
 
-Jawablah pertanyaan berikut dengan bahasa Indonesia yang sederhana, singkat, dan mudah dipahami.
+Pengguna sedang melihat resep:
+
+{recipe_name}
+
+Jawablah pertanyaan berikut berdasarkan resep tersebut.
 
 Pertanyaan:
-{pertanyaan}
+{question}
+
+Jika pertanyaan mengenai:
+- pengganti bahan
+- tips memasak
+- estimasi waktu
+- estimasi biaya
+- cara memasak
+
+Berikan jawaban yang singkat, jelas, dan mudah dipahami.
 """
 
     response = client.chat.completions.create(
@@ -189,7 +204,7 @@ Pertanyaan:
                 "content": prompt
             }
         ],
-        temperature=0.5,
+        temperature=0.7,
     )
 
     return jsonify({
