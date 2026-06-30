@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Ollama AI Aktif"
+    return "Groq AI Aktif"
 @app.route("/test")
 def test():
     return "Backend Berhasil!"
