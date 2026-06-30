@@ -166,6 +166,36 @@ Buat 3 resep yang berbeda.
         "resep": hasil_json
     })
 
+@app.route("/chat", methods=["POST"])
+def chat():
+
+    data = request.get_json()
+    pertanyaan = data.get("question", "")
+
+    prompt = f"""
+Kamu adalah AI Chef yang membantu anak kos.
+
+Jawablah pertanyaan berikut dengan bahasa Indonesia yang sederhana, singkat, dan mudah dipahami.
+
+Pertanyaan:
+{pertanyaan}
+"""
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        temperature=0.5,
+    )
+
+    return jsonify({
+        "answer": response.choices[0].message.content
+    })
+
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
