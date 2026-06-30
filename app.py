@@ -175,25 +175,33 @@ def chat_ai():
     recipe_name = data["recipe_name"]
 
     prompt = f"""
-Kamu adalah AI Chef Indonesia khusus anak kos.
+Kamu adalah AI Chef Indonesia yang membantu anak kos.
 
-Pengguna sedang melihat resep:
+Pengguna sedang melihat resep berikut:
 
 {recipe_name}
 
-Jawablah pertanyaan berikut berdasarkan resep tersebut.
-
-Pertanyaan:
+Pertanyaan pengguna:
 {question}
 
-Jika pertanyaan mengenai:
+Jawablah hanya berdasarkan resep di atas.
+
+Jika pengguna bertanya mengenai:
 - pengganti bahan
 - tips memasak
 - estimasi waktu
 - estimasi biaya
 - cara memasak
+- penyimpanan makanan
+- nilai gizi
 
-Berikan jawaban yang singkat, jelas, dan mudah dipahami.
+Berikan jawaban yang:
+- singkat
+- jelas
+- mudah dipahami
+- maksimal 5 kalimat.
+
+Jika informasi tidak terdapat pada resep, berikan saran yang masuk akal tanpa mengarang fakta.
 """
 
     response = client.chat.completions.create(
